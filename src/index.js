@@ -2,8 +2,15 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 
-const root = ReactDOM.createRoot(document.getElementById('vs-accord'));
-root.render(<App />);
+setTimeout(() => {
+  const container = document.getElementById('vs-accord');
+  if (container) {
+    const root = ReactDOM.createRoot(container);
+    root.render(<App />);
+  } else {
+    console.error('vs-accord element not found');
+  }
+}, 0);
 
 
 // If you want to start measuring performance in your app, pass a function
