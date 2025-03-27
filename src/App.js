@@ -14,7 +14,7 @@ function App() {
 
   return (
     <>
-      <button onClick={toggleButton}>Hello There</button>
+      <button onClick={toggleButton}>you are a good person</button>
       {isOpen && <p>World</p>}
     </>
   );
