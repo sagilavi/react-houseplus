@@ -1,41 +1,34 @@
 const fs = require('fs');
 const path = require('path');
 
-// Read current version from version file or create if doesn't exist
+// Path to store the version number
+const versionFile = path.join(__dirname, 'version.txt');
+
+// Get current version or start from 9999 (so first build will be 10000)
 function getCurrentVersion() {
-    const versionFile = path.join(__dirname, 'current-version.txt');
     try {
         if (fs.existsSync(versionFile)) {
-            const version = parseInt(fs.readFileSync(versionFile, 'utf8'));
-            return version;
+            return parseInt(fs.readFileSync(versionFile, 'utf8'));
         }
     } catch (err) {
-        console.error('Error reading version file:', err);
+        console.error('Error reading version:', err);
     }
-    return 0;
+    return 9999; // Start from 9999 so first increment will be 10000
 }
 
 // Save new version
 function saveVersion(version) {
-    const versionFile = path.join(__dirname, 'current-version.txt');
     try {
         fs.writeFileSync(versionFile, version.toString());
     } catch (err) {
-        console.error('Error writing version file:', err);
+        console.error('Error saving version:', err);
     }
 }
 
-// Get next version and update the file
-function getNextVersion() {
-    const currentVersion = getCurrentVersion();
-    const nextVersion = currentVersion + 1;
-    saveVersion(nextVersion);
-    return nextVersion.toString().padStart(3, '0');
-}
+// Get and increment version
+const currentVersion = getCurrentVersion();
+const newVersion = currentVersion + 1;
+saveVersion(newVersion);
 
-// Format version string
-function formatVersion() {
-    return `ver1.${getNextVersion()}`;
-}
-
-console.log(formatVersion()); 
+// Output the new version
+console.log(newVersion); 

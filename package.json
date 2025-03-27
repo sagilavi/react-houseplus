@@ -15,7 +15,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && for /f %i in ('node scripts/version-manager.js') do (copy /Y build\\static\\js\\main.*.js build\\static\\js\\main.%i.js && copy /Y build\\static\\css\\main.*.css build\\static\\css\\main.%i.css)",
+    "build": "react-scripts build && powershell -Command \"$v = node scripts/version-manager.js; Copy-Item build\\static\\js\\main.*.js -Destination build\\static\\js\\main.$v.js; Copy-Item build\\static\\css\\main.*.css -Destination build\\static\\css\\main.$v.css\"",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
