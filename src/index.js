@@ -10,7 +10,7 @@ setTimeout(() => {
   } else {
     console.error('vs-accord element not found');
   }
-}, 0);
+}, 2000);
 
 
 // If you want to start measuring performance in your app, pass a function
